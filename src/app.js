@@ -1,5 +1,5 @@
 import express from "express"
-import { userROuter } from "./router/index.js"
+import router from "./router/index.js"
 
 
 const app = express()
@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 })
 
 
-app.use("/api/v1",userROuter)
+app.use("/api/v1",router)
 
 
 

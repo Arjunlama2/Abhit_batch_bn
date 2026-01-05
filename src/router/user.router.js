@@ -1,17 +1,15 @@
 import express from "express"
-import { createUser, deleteUer } from "../controller/user.controller.js"
+import { createUser, deleteUer, getALlUsers } from "../controller/user.controller.js"
 import { authenticate } from "../middleware/auth.js"
 
 const router=express.Router()
 
-router.post("/user",createUser)
-router.get("/user",authenticate,(req,res)=>{
-    res.send("all user")
-})
+router.post("/signup",createUser)
+router.get("/",authenticate,getALlUsers)
 
 
-router.patch("/user/:id",()=>{})
+router.patch("/:id",()=>{})
 
-router.delete("/user/:id",authenticate,deleteUer)
+router.delete("/:id",deleteUer)
 
 export default router
