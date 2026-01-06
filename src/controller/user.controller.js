@@ -1,40 +1,18 @@
 import Joi from "joi"
 
-const userSchema = Joi.object({
-    username: Joi.string().alphanum().min(3).max(30).required(),
-    password: Joi.string().required(),
-    email: Joi.string().required(),
-});
+
 
 
 // crud
 
 import mongoose from "mongoose"
 import User from "../model/User.model.js"
-import bcrypt from "bcryptjs";
 
 
-export const createUser = async (req, res) => {
-    try {
-        const data = req.body
-        const { error, value } = userSchema.validate(data)
-
-        if (!error) {
-            const hash = bcrypt.hashSync(value.password, 10);
-            await User.create({...value,password:hash})
-            res.status(201).send()
-
-        } else {
-            throw error
-        }
 
 
-    }
-    catch (err) {
-        console.log(err)
-        res.send(400).send("Bad request")
-    }
-}
+
+
 
 
 
