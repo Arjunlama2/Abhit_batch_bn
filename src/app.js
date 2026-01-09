@@ -1,5 +1,6 @@
 import express from "express"
 import router from "./router/index.js"
+import { handleError } from "./middleware/handleError.js"
 
 
 const app = express()
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/v1",router)
-
+app.use(handleError)
 
 
 export default app

@@ -7,22 +7,24 @@ const userSchema = Joi.object({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().required(),
     email: Joi.string().required(),
-    role:Joi.string()
+    role: Joi.string(),
+
 });
 
 const loginSchema = Joi.object({
     password: Joi.string().required(),
     email: Joi.string().required(),
 });
-export const createUser = async (req, res) => {
+export const createUser = async (req, res,next) => {
     try {
         const data = req.body
-        const { error, value } = userSchema.validate(data)
-
+        const { error, value } = userSchema.validate(data,{
+            
+        })
         if (!error) {
             const hash = bcrypt.hashSync(value.password, 10);
             await User.create({ ...value, password: hash })
-            res.status(201).send({message:"user created successfuly!"})
+            res.status(201).send({ message: "user created successfuly!" })
 
         } else {
             throw error
@@ -31,8 +33,7 @@ export const createUser = async (req, res) => {
 
     }
     catch (err) {
-        console.log(err)
-        res.send(400).send("Bad request")
+        next(err)
     }
 }
 
@@ -52,9 +53,9 @@ export const login = async (req, res) => {
                 const userObject = user.toObject()
                 delete userObject.password
                 const hashedPassword = user.password
-                const match = await bcrypt.compare(password,hashedPassword)
+                const match = await bcrypt.compare(password, hashedPassword)
                 if (match) {
-                    const token = jwt.sign({...userObject}, secret);
+                    const token = jwt.sign({ ...userObject }, secret);
                     res.status(200).send({ mesage: "User Login successful", token: token })
                 } else {
                     res.status(403).send({ message: "Wrong credential" })
