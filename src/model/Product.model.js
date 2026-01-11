@@ -21,7 +21,7 @@ const productSchema = new Schema({
         required: true
     },
     image: {
-        type: [String],
+        type: String,
     },
     productOf: {
         type: ObjectId,
