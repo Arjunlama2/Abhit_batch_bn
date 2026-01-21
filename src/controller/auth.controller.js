@@ -56,7 +56,7 @@ export const login = async (req, res) => {
                 const match = await bcrypt.compare(password, hashedPassword)
                 if (match) {
                     const token = jwt.sign({ ...userObject }, secret);
-                    res.status(200).send({ mesage: "User Login successful", token: token })
+                    res.status(200).send({ mesage: "User Login successful", token: token ,user})
                 } else {
                     res.status(403).send({ message: "Wrong credential" })
                 }
