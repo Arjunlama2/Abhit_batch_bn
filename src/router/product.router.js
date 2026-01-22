@@ -6,6 +6,6 @@ import { authenticate, isAdmin } from "../middleware/auth.js"
 const router = express.Router()
 router.get("/", getAllProducts)
 
-router.post("", authenticate, isAdmin, upload.single("image"), checkkFile, createProduct)
+router.post("/", authenticate, isAdmin, upload.single("image"), checkkFile, createProduct)
 
 export default router

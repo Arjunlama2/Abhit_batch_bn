@@ -21,7 +21,7 @@ const allRouters = [
         path: "/product",
         router: productRouter
     }, {
-        path: "banner",
+        path: "/banner",
         router: bannerRouter
     }
 ]

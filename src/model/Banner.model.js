@@ -13,6 +13,7 @@ const bannerSchema=new Schema({
     },
     product:{
         type:ObjectId,
+        ref:"Product",
         required:true
     },
     description:{
