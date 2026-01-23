@@ -14,7 +14,9 @@ const productSchema = Joi.object({
 export const createProduct = async (req, res, next) => {
     try {
         req.body.productOf = req.user._id
-        const { error, value } = productSchema.validate(req.body)
+        const { error, value } = productSchema.validate(req.body,{
+            allowUnknown:true
+        })
         if (!error) {
             const product = await Product.create(value)
             res.status(201).json({ message: "Product created successfully!" })

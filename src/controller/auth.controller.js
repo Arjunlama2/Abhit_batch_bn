@@ -33,6 +33,7 @@ export const createUser = async (req, res,next) => {
 
     }
     catch (err) {
+        
         next(err)
     }
 }
