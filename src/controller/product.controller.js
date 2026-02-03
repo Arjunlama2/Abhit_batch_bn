@@ -47,7 +47,7 @@ export const getProductById=async ( req,res,next) => {
         const {id}=req.params
 
         const productId=new mongoose.Types.ObjectId(id)
-        const product=await Product.findOneById(productId)
+        const product=await Product.findById({_id:productId})
         res.status(200).send(product)
 
     }catch(err){
