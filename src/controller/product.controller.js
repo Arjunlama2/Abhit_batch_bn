@@ -1,5 +1,6 @@
 import Joi from "joi"
 import Product from "../model/Product.model.js";
+import mongoose from "mongoose";
 
 const productSchema = Joi.object({
     title: Joi.string().alphanum().min(3).max(30).required(),
@@ -39,4 +40,18 @@ export const getAllProducts = async (req, res, next) => {
     } catch (err) {
         next(err)
     }
+}
+
+export const getProductById=async ( req,res,next) => {
+    try{
+        const {id}=req.params
+
+        const productId=new mongoose.Types.ObjectId(id)
+        const product=await Product.findOneById(productId)
+        res.status(200).send(product)
+
+    }catch(err){
+        next(err)
+    }
+    
 }
