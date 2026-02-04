@@ -44,6 +44,7 @@ export const createUser = async (req, res,next) => {
 export const login = async (req, res,next) => {
     try {
         const data = req.body
+        console.log(data)
         const { error, value } = loginSchema.validate(data)
 
         if (!error) {
