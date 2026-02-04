@@ -74,6 +74,6 @@ export const login = async (req, res) => {
         }
 
     } catch (err) {
-        console.log(err)
+        next(err)
     }
 }
